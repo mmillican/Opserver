@@ -101,7 +101,7 @@ else if (i.LastFetch.LastSuccess == null)
                 <tbody>
                     <tr title="@pd.CPUCount.Pluralize("Core") (including hyperthreading) across @pd.CPUSocketCount.Pluralize("Socket")">
                         <td>CPU</td>
-                        <td><a href="/sql/top?node=@i.Name">@(i.CurrentCPUPercent)%</a> <span class="note">(@pd.CPUCount.Pluralize("Core"))</span> <img class="cpu-graph" width="100" alt="CPU in the last hour for @i.Name" src="~/graph/sql/cpu/spark?node=@i.Name&time=@DateTime.UtcNow.ToString("yyyy-MM-dd-HH-mm")" /></td>
+                        <td><a href="/sql/top?node=@i.Name">@(i.CurrentCPUPercent)%</a> <span class="note">(@pd.CPUCount.Pluralize("Core"))</span> <img class="cpu-graph" width="100" alt="CPU in the last hour for @i.Name" src="@Url.Content(string.Format("~/graph/sql/cpu/spark?node={0}&time={1}", i.Name, DateTime.UtcNow.ToString("yyyy-MM-dd")))" /></td>
                     </tr>
                     @if (pd.VirtualMachineType != VirtualMachineTypes.None)
                     {
@@ -344,7 +344,7 @@ Avgerage Write Stall: @v.AvgWriteStallMS ms">
                         </tr>
                     </thead>
                     <tbody>
-                        @RenderPerSecCounter("SQL Statistics", "Batch Requests/sec", "", valueUrl: string.Format("/sql/top?node={0}&sort=ExecutionsPerMinute&LastRunSeconds=300", i.Name))
+                        @RenderPerSecCounter("SQL Statistics", "Batch Requests/sec", "", valueUrl: string.Format("~/sql/top?node={0}&sort=ExecutionsPerMinute&LastRunSeconds=300", i.Name))
                         @RenderPerSecCounter("SQL Statistics", "SQL Compilations/sec", "", toSuffix: v => compPercent.HasValue ? string.Format("({0}%)", compPercent.Value.ToString("##0.##")) : null)
                         @RenderPerSecCounter("SQL Statistics", "SQL Re-Compilations/sec", "")
                         @RenderPerSecCounter("SQL Statistics", "Guided plan executions/sec", "")

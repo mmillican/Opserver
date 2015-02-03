@@ -11,37 +11,43 @@
 {
     public string GetLink(Issue i)
     {
+        var url = "";
         var node = i as Issue<Node>;
         if (node != null && node.Item != null)
         {
-            return string.Format("/dashboard/node?node={0}", node.Item.PrettyName.UrlEncode());
+            url = string.Format("~/dashboard/node?node={0}", node.Item.PrettyName.UrlEncode());
         }
         var agIssue = i as Issue<SQLNode.AvailabilityGroupInfo>;
         if (agIssue != null && agIssue.Item != null)
         {
-            return string.Format("/sql/servers#/cluster/{0}/{1}", agIssue.Item.Node.Cluster.Name.UrlEncode(), agIssue.Item.Name.UrlEncode());
+            url = string.Format("~/sql/servers#/cluster/{0}/{1}", agIssue.Item.Node.Cluster.Name.UrlEncode(), agIssue.Item.Name.UrlEncode());
         }
         var sqlInstance = i as Issue<SQLInstance>;
         if (sqlInstance != null && sqlInstance.Item != null)
         {
-            return string.Format("/sql/instance?node={0}", sqlInstance.Item.Name.UrlEncode());
+            url = string.Format("~/sql/instance?node={0}", sqlInstance.Item.Name.UrlEncode());
         }
         var redisInstance = i as Issue<RedisInstance>;
         if (redisInstance != null && redisInstance.Item != null)
         {
-            return string.Format("/redis/instance?node={0}:{1}", redisInstance.Item.Host, redisInstance.Item.Port);
+            url = string.Format("~/redis/instance?node={0}:{1}", redisInstance.Item.Host, redisInstance.Item.Port);
         }
         var elasticCluster = i as Issue<ElasticCluster>;
         if (elasticCluster != null && elasticCluster.Item != null)
         {
-            return string.Format("/elastic/cluster?cluster={0}", elasticCluster.Item.Name);
+            url = string.Format("~/elastic/cluster?cluster={0}", elasticCluster.Item.Name);
         }
         var haproxyGroup = i as Issue<HAProxyGroup>;
         if (haproxyGroup != null && haproxyGroup.Item != null)
         {
-            return string.Format("/haproxy?group={0}", haproxyGroup.Item.Name.UrlEncode());
+            url = string.Format("~/haproxy?group={0}", haproxyGroup.Item.Name.UrlEncode());
         }
-        return "";
+
+        if (!string.IsNullOrEmpty(url))
+        {
+            url = Url.Content(url);
+        }
+        return url;
     }
 }
 <div class="issues-list" data-issue-count="@issues.Count">

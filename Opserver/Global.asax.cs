@@ -34,12 +34,6 @@ namespace StackExchange.Opserver
             routes.MapRoute("", "{*url}", new { controller = "Error", action = "PageNotFound" });
         }
 
-        private static void RegisterBundles(BundleCollection bundles)
-        {
-            bundles.Add(new ScriptBundle("~/scripts/plugins.js").IncludeDirectory("~/Content/js/plugins", "*.js"));
-            bundles.Add(new ScriptBundle("~/scripts/scripts.js").Include("~/Content/js/Scripts*"));
-        }
-
         public override void Init()
         {
             base.Init();
@@ -54,7 +48,7 @@ namespace StackExchange.Opserver
 
             AreaRegistration.RegisterAllAreas();
             RegisterRoutes(RouteTable.Routes);
-            RegisterBundles(BundleTable.Bundles);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             //BundleTable.EnableOptimizations = true;
 
             SetupMiniProfiler();
@@ -77,8 +71,8 @@ namespace StackExchange.Opserver
             MiniProfiler.Settings.RouteBasePath = "~/profiler/";
             MiniProfiler.Settings.PopupRenderPosition = RenderPosition.Left;
             var paths = MiniProfiler.Settings.IgnoredPaths.ToList();
-            paths.Add("/graph/");
-            paths.Add("/login");
+            paths.Add("~/graph/");
+            paths.Add("~/login");
             MiniProfiler.Settings.IgnoredPaths = paths.ToArray();
             MiniProfiler.Settings.PopupMaxTracesToShow = 5;
             MiniProfiler.Settings.ProfilerProvider = new OpserverProfileProvider();

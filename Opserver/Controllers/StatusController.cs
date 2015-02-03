@@ -124,11 +124,12 @@ namespace StackExchange.Opserver.Controllers
         {
             if (Current.User.IsAnonymous)
             {
-                return Redirect("/login?ReturnUrl=" + Request.Url.PathAndQuery.UrlEncode());
+                return RedirectToAction("Login", "Login", new {ReturnUrl = Request.Url.PathAndQuery.UrlEncode()});
+                //return Redirect("/login?ReturnUrl=" + Request.Url.PathAndQuery.UrlEncode());
             }
 
             Response.StatusCode = (int)HttpStatusCode.Forbidden;
-            return View("~/Views/Shared/AccessDenied.cshtml");
+            return View();
         }
 
         public void SetTitle(string title)

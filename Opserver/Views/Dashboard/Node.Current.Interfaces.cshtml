@@ -8,7 +8,7 @@
         <div class="spark-no-data">No Data Available</div>
         return;
     }
-    <img class="dashboard-spark" src="/graph/interface/@type.ToLower()/spark?id=@i.Id"  width="@Current.ViewSettings.SparklineChartWidth" height="@Current.ViewSettings.SparklineChartHeight" alt="" data-nid="@i.Id" data-name="@i.PrettyName" />
+    <img class="dashboard-spark" src="@Url.Content(string.Format("~/graph/{0}/spark?id={1}", type.ToLower(), i.Id))"  width="@Current.ViewSettings.SparklineChartWidth" height="@Current.ViewSettings.SparklineChartHeight" alt="" data-nid="@i.Id" data-name="@i.PrettyName" />
 }
 <table class="node-dashboard main-dashboard interface-dashboard striped-dashboard">
     <thead>

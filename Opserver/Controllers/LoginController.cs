@@ -12,7 +12,7 @@ namespace StackExchange.Opserver.Controllers
         public ActionResult Login(string returnUrl)
         {
             if (returnUrl == "/")
-                return Redirect("/login");
+                return Redirect("~/login");
 
             var vd = new LoginModel();
             return View(vd);
@@ -30,7 +30,7 @@ namespace StackExchange.Opserver.Controllers
             }
             vd.ErrorMessage = "Login failed";
 
-            return View("~/Views/Login/Login.cshtml", vd);
+            return View(vd);
         }
 
         [Route("logout"), AlsoAllow(Roles.Anonymous)]

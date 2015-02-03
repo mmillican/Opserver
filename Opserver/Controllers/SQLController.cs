@@ -26,7 +26,7 @@ namespace StackExchange.Opserver.Controllers
         [Route("sql")]
         public ActionResult Dashboard()
         {
-            return Redirect("/sql/servers");
+            return RedirectToAction("Servers");
         }
 
         [Route("sql/servers")]
