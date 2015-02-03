@@ -8,8 +8,8 @@
 {
     <div class="summary-dashboard">
         <h3>
-            <a href="/sql/instance?node=@Model.Name">@Model.Name</a><span class="note">:</span> Connections
-            <a href="/sql/connections?node=@Model.Name" class="top-right-nav">View Detail</a>
+            <a href="@Url.Action("Instance", new {node = Model.Name})">@Model.Name</a><span class="note">:</span> Connections
+            <a href="@Url.Action("Connections", new {node = Model.Name})" class="top-right-nav">View Detail</a>
         </h3>
         <div>
             <table>

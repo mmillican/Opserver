@@ -25,7 +25,7 @@
 }
 @helper ConnectionsCell(SQLInstance i) {
     var props = i.ServerProperties.SafeData(true);
-    <td><a href="/sql/connections?node=@i.Name.UrlEncode()">@props.ConnectionCount.ToComma()</a> <span class="note">/ @props.SessionCount.ToComma()</span></td>
+    <td><a href="@Url.Action("Connections", new {node = i.Name.UrlEncode()})">@props.ConnectionCount.ToComma()</a> <span class="note">/ @props.SessionCount.ToComma()</span></td>
 }
 @helper BatchesCell(SQLInstance i) {
     var batches = i.GetPerfCounter("SQL Statistics", "Batch Requests/sec", "");
@@ -38,7 +38,7 @@
         {
             <tbody class="node-header" data-name="header-@c.Name">
                 <tr class="category-row">
-                    <th colspan="12"><h3><a href="@Url.Content(string.Format("~/sql/servers#/cluster/{0}", c.Name))" class="node-name-link" data-refresh="5">@c.IconSpan() @c.Name</a> <span class="quorum-info">(@c.QuorumType.GetDescription() - @c.QuorumState.GetDescription())</span></h3></th>
+                    <th colspan="12"><h3><a href="@Url.Action("Servers")#/cluster/@c.Name" class="node-name-link" data-refresh="5">@c.IconSpan() @c.Name</a> <span class="quorum-info">(@c.QuorumType.GetDescription() - @c.QuorumState.GetDescription())</span></h3></th>
                 </tr>
                 <tr>
                     <th></th>
@@ -62,9 +62,9 @@
                     var isPrimary = n.IsAllAGsPrimary;
                     <tr class="@n.RowClass()@(isPrimary ? " primary-row" : "")">
                         <td>@n.IconSpan()</td>
-                        <td><a href="@Url.Content(string.Format("~/sql/instance?node={0}", n.Name.UrlEncode()))" class="node-name-link">@n.Name</a></td>
+                        <td><a href="@Url.Action("Instance", new {node = n.Name.UrlEncode()}))" class="node-name-link">@n.Name</a></td>
                         <td title="Votes: @n.ClusterVotes">@n.ClusterMember.State.GetDescription()</td>
-                        <td><a href="@Url.Content(string.Format("~/sql/active?node={0}", n.Name.UrlEncode()))">@(n.ServerInfo != null ? n.ServerInfo.CPUStatusSpan() : null)</a></td>
+                        <td><a href="@Url.Action("Active", new {node = n.Name.UrlEncode()})">@(n.ServerInfo != null ? n.ServerInfo.CPUStatusSpan() : null)</a></td>
                         <td class="sql-cpu-spark"><img alt="CPU in the last hour for @n.Name" src="@Url.Content(string.Format("~/graph/sql/cpu/spark?node={0}", n.Name))" /></td>
                         @MemoryCell(n)
                         <td>@SQLHelpers.HealthDescriptionAGs(n, cAgs)</td>
@@ -104,8 +104,8 @@
                 var dbs = i.Databases.SafeData(true);
                 <tr class="@i.RowClass()">
                     <td>@i.IconSpan()</td>
-                    <td><a href="@Url.Content(string.Format("~/sql/instance?node={0}", i.Name.UrlEncode()))" class="node-name-link">@i.Name</a></td>
-                    <td><a href="@Url.Content(string.Format("~/sql/active?node={0}", i.Name.UrlEncode()))">@(i.CurrentCPUPercent.HasValue ? i.CurrentCPUPercent + "%" : "")</a></td>
+                    <td><a href="@Url.Action("Instance", new {node = i.Name.UrlEncode()})" class="node-name-link">@i.Name</a></td>
+                    <td><a href="@Url.Action("Active", new { node = i.Name.UrlEncode()})">@(i.CurrentCPUPercent.HasValue ? i.CurrentCPUPercent + "%" : "")</a></td>
                     <td class="sql-cpu-spark"><img alt="CPU in the last hour for @i.Name" src="@Url.Content(string.Format("~/graph/sql/cpu/spark?node={0}&time={1}", i.Name, DateTime.UtcNow.ToString("yyyy-MM-dd")))" /></td>
                     @MemoryCell(i)
                     <td title="@dbs.Count Databases:

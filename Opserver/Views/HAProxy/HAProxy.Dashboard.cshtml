@@ -191,7 +191,7 @@
                                 {
                                     <a href="#" data-group="@g.GroupName" data-proxy="@g.ProxyName" data-action="@HAProxyAdmin.Action.Enable" class="action-icon action-plus@(anyDown ? "" : " disabled")" title="put this server into rotation for this backend"></a><a href="#" data-group="@g.GroupName" data-proxy="@g.ProxyName" data-action="@HAProxyAdmin.Action.Disable" class="action-icon action-minus@(anyUp ? "" : " disabled")" title="take this server out of rotation for this backend"></a>
                                 }
-                                <a href="/haproxy?watch=@g.GroupLinkName.UrlEncode()@groupQS" class="node-name-link">@g.GroupStatus.IconSpan() @g.GroupName: @g.NiceName</a>
+                                <a href="@Url.Action("HAProxyDashboard", new { watch = g.GroupLinkName.UrlEncode() })@groupQS" class="node-name-link">@g.GroupStatus.IconSpan() @g.GroupName: @g.NiceName</a>
                             </div>
                         </th>
                     </tr>

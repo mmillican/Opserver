@@ -18,13 +18,13 @@
     <div class="tabs-links">
         @if (Current.User.IsHAProxyAdmin)
         {
-        <a class="@(Model.View == HAProxyModel.Views.Admin ? "selected" : "") admin-link" href="/haproxy/admin">admin</a>
+        <a class="@(Model.View == HAProxyModel.Views.Admin ? "selected" : "") admin-link" href="@Url.Action("HAProxyAdminDashboard")">admin</a>
         }
-        <a class="@(Model.View == HAProxyModel.Views.Dashboard ? "selected" : "")" href="/haproxy">dashboard</a>
-        <a class="@(Model.View == HAProxyModel.Views.Detailed ? "selected" : "")" href="/haproxy/detailed">detailed</a>
+        <a class="@(Model.View == HAProxyModel.Views.Dashboard ? "selected" : "")" href="@Url.Action("HAProxyDashboard")">dashboard</a>
+        <a class="@(Model.View == HAProxyModel.Views.Detailed ? "selected" : "")" href="@Url.Action("HAProxyDetailed")">detailed</a>
         @if (Current.Settings.HAProxy.Traffic.Enabled)
         {
-        <a class="@(Model.View == HAProxyModel.Views.Traffic ? "selected" : "")" href="/haproxy/traffic">traffic history</a>
+        <a class="@(Model.View == HAProxyModel.Views.Traffic ? "selected" : "")" href="@Url.Action("HAProxyTraffic")">traffic history</a>
         }
     </div>
 </div>
@@ -35,7 +35,7 @@
         <ul class="top-server-list">
             <li>Instances: </li>
             @{ var ac = Model.SelectedGroup == null ? @" class=""selected""" : ""; }
-            <li@(ac.AsHtml())><a href="/haproxy@(Model.View == HAProxyModel.Views.Admin ? "/admin" : "")"><span>All</span></a></li>
+            <li@(ac.AsHtml())><a href="@(Model.View == HAProxyModel.Views.Admin ? Url.Action("HAProxyAdminDashboard") : "")"><span>All</span></a></li>
             @foreach (var ha in allGroups)
             {
                 var cha = ha == Model.SelectedGroup ? "selected" : null;

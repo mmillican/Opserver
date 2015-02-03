@@ -33,8 +33,8 @@
     {
     <div class="summary-dashboard">
         <h3 class="header">
-            <a href="/redis">Redis</a><span class="note">:</span> @i.IconSpan() @i.Host<span class="note">: </span> @i.Port (@i.Name)
-            <span class="note smaller">(<a href="/redis/server?node=@i.Host">View Raw</a>)</span>
+            <a href="@Url.Action("Dashboard")">Redis</a><span class="note">:</span> @i.IconSpan() @i.Host<span class="note">: </span> @i.Port (@i.Name)
+            <span class="note smaller">(<a href="@Url.Action("Server", new {node = i.Host})">View Raw</a>)</span>
             @Helpers.PollNow(i)
         </h3>
         <div class="left-col">
@@ -60,7 +60,7 @@
                             <td>
                                 @info.Server.Version
                                 <span class="note">(</span><a href="#/redis/summary/config">view config</a><span class="note">)</span>
-                                <span class="note">(</span><a href="/redis/instance/get-config/@i.Host-@i.Port-config.zip">download</a><span class="note">)</span>
+                                <span class="note">(</span><a href="@Url.Action("DownloadConfiguration", new { host = i.Host, port = i.Port})">download</a><span class="note">)</span>
                             </td>
                         </tr>
                         <tr>
@@ -254,7 +254,7 @@
                         @foreach (var kd in info.Keyspace.KeyData)
                         {
                             <tr>
-                                <td>@kd.Key@if (Current.User.IsInRole(Roles.RedisAdmin)) { <span class="note">(<a href="/redis/analyze/memory?node=@i.Host:@i.Port&db=@kd.Key" class="node-name-link">analyze</a>)</span>}</td>
+                                <td>@kd.Key@if (Current.User.IsInRole(Roles.RedisAdmin)) { <span class="note">(<a href="@Url.Action("Analysis", new {node = string.Format("{0}:{1}", i.Host, i.Port), db = kd.Key})" class="node-name-link">analyze</a>)</span>}</td>
                                 <td>@kd.Value.Keys.ToComma()</td>
                                 <td>@kd.Value.Expires.ToComma()</td>
                             </tr>

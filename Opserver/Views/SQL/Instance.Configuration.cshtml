@@ -49,7 +49,7 @@
 }
 <div class="summary-dashboard">
     <h3>
-        <a href="/sql/instance?node=@Model.Name">@Model.Name</a><span class="note">:</span> Configuration
+        <a href="@Url.Action("Instance", new {node=  Model.Name})">@Model.Name</a><span class="note">:</span> Configuration
 
         <span class="top-right-info">Updated @configs.ToPollSpan()</span>
     </h3>

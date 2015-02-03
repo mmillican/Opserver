@@ -25,7 +25,7 @@
 <div class="item @s.MonitorStatus.Class() @GetItemClass(s)">
     <div class="server-name">
         @s.IconSpan()
-        <a href="/dashboard/node?node=@s.PrettyName" class="node-name-link">@s.PrettyName</a>
+        <a href="@Url.Action("SingleNode", "Dashboard", new {node = s.PrettyName})" class="node-name-link">@s.PrettyName</a>
         @if (s.IsUnwatched)
         {
             <span class="unmanaged">(unmanaged)</span>
@@ -45,6 +45,6 @@
     </div>
     <div class="status-block net-status">
         <span class="label">Net </span>@s.PrettyTotalNetwork() 
-        <div class="status-graph"><a href="/dashboard/node?node=@s.PrettyName&view=@CurrentStatusTypes.Interfaces">@Graph(s, "Network")</a></div>
+        <div class="status-graph"><a href="@Url.Action("SingleNode", "Dashboard", new {node = s.PrettyName, view = CurrentStatusTypes.Interfaces})">@Graph(s, "Network")</a></div>
     </div>
 </div>

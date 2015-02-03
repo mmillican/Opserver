@@ -12,13 +12,13 @@
 }
 else
 {
-    <div class="error-header"><span class="error-title">@error.Message</span> <span class="similar-link">(<a href="/exceptions/similar?id=@error.GUID&app=@error.ApplicationName.UrlEncode()" title="view exceptions with the same message in the same log">view similar</a>)</span> <span class="similar-link">(<a href="/exceptions/similar?id=@error.GUID&app=@error.ApplicationName.UrlEncode()&byTime=true" title="view exceptions within 5 minutes of this one">view nearby</a>)</span></div>
+    <div class="error-header"><span class="error-title">@error.Message</span> <span class="similar-link">(<a href="@Url.Action("ExceptionsSimilar", "Exceptions", new {id=error.GUID, app = error.ApplicationName.UrlEncode()})" title="view exceptions with the same message in the same log">view similar</a>)</span> <span class="similar-link">(<a href="@Url.Action("ExceptionsSimilar", "Exceptions", new {id=error.GUID, app = error.ApplicationName.UrlEncode(), byTime = true})" title="view exceptions within 5 minutes of this one">view nearby</a>)</span></div>
     <div class="error-info">
         <div class="error-type">@error.Type</div>
         <pre class="error-detail">@error.Detail
         </pre>
         <p class="error-time">occurred <b title="@error.CreationDate.ToLongDateString() at @error.CreationDate.ToLongTimeString()">@error.CreationDate.ToRelativeTime()</b> on @error.MachineName
-            <span class="preview-delete-link similar-link">(<a class="clear-all-link" href="/exceptions/delete-similar" data-log="@error.ApplicationName" data-id="@error.GUID">Clear all similar</a>)</span>
+            <span class="preview-delete-link similar-link">(<a class="clear-all-link" href="@Url.Action("ExceptionsDeleteSimilar", "Exceptions")" data-log="@error.ApplicationName" data-id="@error.GUID">Clear all similar</a>)</span>
         </p>
     </div>
 }

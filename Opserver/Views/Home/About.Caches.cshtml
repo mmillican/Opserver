@@ -99,7 +99,7 @@
                     <td>@pn.LastPoll.ToRelativeTimeSpanMini() <span class="note">(@pn.LastPollDuration.ToTimeStringMini())</span></td>
                     <td>@pn.PollTaskStatus</td>
                     <td>
-                        <a href="/json/@pn.NodeType/@pn.UniqueKey">JSON</a>
+                        <a href="@Url.Content(string.Format("~/json/{0}/{1}", pn.NodeType, pn.UniqueKey))">JSON</a>
                         <a href="#" class="poll-now" data-type="@pn.NodeType" data-key="@pn.UniqueKey">Poll All</a>
                     </td>
                 </tr>
@@ -136,8 +136,8 @@ Url: /@pn.NodeType/@pn.UniqueKey.UrlEncode()/@p.ParentMemberName">@GetTypeDescri
                         </td>
                         <td class="@(p.IsPolling ? "good" : "note")">(@(p.IsPolling ? "active" : "idle"))</td>
                         <td>
-                            <a href="/json/@pn.NodeType/@pn.UniqueKey.UrlEncode()/@p.ParentMemberName">JSON</a> 
-                            <a href="/profiler/results?id=@p.UniqueId" target="_blank">Profile</a>
+                            <a href="@Url.Content(string.Format("~/json/{0}/{1}/{2}", pn.NodeType, pn.UniqueKey.UrlEncode(), p.ParentMemberName))">JSON</a> 
+                            <a href="@Url.Content(string.Format("~/profiler/results?id={0}", p.UniqueId))" target="_blank">Profile</a>
                             <a href="#" class="poll-now" data-type="@pn.NodeType" data-key="@pn.UniqueKey" data-id="@p.UniqueId">Poll Now</a>
                         </td>
                     </tr>

@@ -25,11 +25,11 @@
     <ul class="top-server-list">
         <li>Exception Logs: </li>
         @{ var ac = Model.ShowAll ? @" class=""selected""" : ""; }
-        <li@(ac.AsHtml())><a href="/exceptions"><span>All</span></a></li>
+        <li@(ac.AsHtml())><a href="@Url.Action("Exceptions", "Exceptions")"><span>All</span></a></li>
         @foreach (var a in distinctApps)
         {
             var cl = a.Name == log ? "selected" : null;
-            <li class="@cl.AsHtml()"><a href="/exceptions?log=@a.Name.UrlEncode()" title="@a.ExceptionCount.Pluralize("Exception")@(a.MostRecent.HasValue ? ", Last: " + a.MostRecent.ToRelativeTime() : "")"><span>@a.Name</span></a><span class="count">@(a.ExceptionCount > 0 ? " (" + a.ExceptionCount.ToComma() + ")" : "")</span></li>
+            <li class="@cl.AsHtml()"><a href="@Url.Action("Exceptions", "Exceptions", new {log=a.Name.UrlEncode()})" title="@a.ExceptionCount.Pluralize("Exception")@(a.MostRecent.HasValue ? ", Last: " + a.MostRecent.ToRelativeTime() : "")"><span>@a.Name</span></a><span class="count">@(a.ExceptionCount > 0 ? " (" + a.ExceptionCount.ToComma() + ")" : "")</span></li>
         }
     </ul>
 </div>

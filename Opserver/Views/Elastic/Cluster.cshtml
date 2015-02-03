@@ -100,7 +100,7 @@
                     <tr class="@n.RowClass()">
                         <td>@n.IconSpan()</td>
                         <td title="Up since @(upTime.HasValue ? upTime.ToUniversalTime() + " (" + upTime.ToRelativeTime() + ")" : "(unknown)")">
-                            <a href="/elastic/node?cluster=@c.Name.UrlEncode()&node=@n.Name.UrlEncode()">@n.Name.TrimEnd("-" + c.Name)</a>
+                            <a href="@Url.Action("Node", new {cluster = c.Name.UrlEncode(), node = n.Name.UrlEncode()})">@n.Name.TrimEnd("-" + c.Name)</a>
                         </td>
                         <td>@shards.Count().ToComma() (@shards.Count(s => s.Primary) primary)</td>
                         @if (stats.Process != null && stats.Process.CPU != null)
@@ -128,7 +128,7 @@
                         @if (stats.Process != null)
                         {
                             <td title="@c.HealthStatus.Data.Indices.Count.ToComma() indexes with @(stats.Process.OpenFileDescriptors.ToComma()) open file descriptors">
-                                <a href="/elastic/indices?cluster=@c.Name&node=@n.Name">
+                                <a href="@Url.Action("Indices", new { cluster = c.Name, node = n.Name})">
                                     @c.HealthStatus.Data.Indices.Count.ToComma()
                                 </a> <span class="note">@(stats.Indices.Store.SizeInBytes > 0 ? "(" + stats.Indices.Store.SizeInBytes.ToSize("b") + ")" : "")</span>
                             </td>

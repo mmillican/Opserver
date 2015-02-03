@@ -8,7 +8,7 @@
 {
     <div class="summary-dashboard">
         <h3>
-            <a href="/redis/instance?node=@Model.Host:@Model.Port">@Model.Host:@Model.Port (@Model.Name)</a><span class="note">:</span> @clients.Count Clients
+            <a href="@Url.Action("Instance", new {node = string.Format("{0}:{1}", Model.Host, Model.Port)})">@Model.Host:@Model.Port (@Model.Name)</a><span class="note">:</span> @clients.Count Clients
         </h3>
         <div>
             <table id="clients-table" data-node="@Model.Host:@Model.Port">

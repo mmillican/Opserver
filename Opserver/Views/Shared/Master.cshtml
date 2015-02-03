@@ -41,7 +41,7 @@
 <body class="@(Current.IsMobile ? "mobile" : "")">
     <div class="top-bar">
         @Html.Partial("~/Views/Shared/TopTabs.cshtml")
-        <a href="/hub" class="logo"></a>
+        <a href="@Url.Content("~/hub")" class="logo"></a>
         <div class="top-nodes">
             @if (topNodes != null)
             {

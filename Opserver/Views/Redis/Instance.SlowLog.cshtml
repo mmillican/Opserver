@@ -7,7 +7,7 @@
 {
     <div class="summary-dashboard">
         <h3>
-            <a href="/redis/instance?node=@Model.Host:@Model.Port">@Model.Host:@Model.Port (@Model.Name)</a><span class="note">:</span> Slow Command Log
+            <a href="@Url.Action("Instance", new {node = string.Format("{0}:{1}", Model.Host, Model.Port)})">@Model.Host:@Model.Port (@Model.Name)</a><span class="note">:</span> Slow Command Log
         </h3>
         <div>
             <table id="slow-log-table">

@@ -66,10 +66,10 @@
                             @switch (s.GetPrettyState())
                             {
                                 case "Unassigned":
-                                    <a href="/elastic/reroute/assign?index=@s.Index.UrlEncode()&shard=@s.Shard" class="background-post">Assign</a>
+                                    <a href="@Url.Action("Reroute", new { index = s.Index.UrlEncode(), shard = s.Shard, type = "assign"})" class="background-post">Assign</a>
                                     break;
                                 case "Initializing":
-                                <a href="/elastic/reroute/cancel?node=@s.Node.UrlEncode()&index=@s.Index.UrlEncode()&shard=@s.Shard" class="background-post">Cancel</a>
+                                <a href="@Url.Action("Reroute", new { index = s.Index.UrlEncode(), shard = s.Shard, node = s.Node.UrlEncode(), type = "cancel"})" class="background-post">Cancel</a>
                                     break;
                             }
                         </td>

@@ -7,7 +7,7 @@
 {
     <div class="summary-dashboard">
         <h3>
-            <a href="/elastic/node?cluster=@Model.ClusterName&node=@Model.NodeName">@Model.ClusterName: @Model.NodeName</a><span class="note">:</span> Settings</h3>
+            <a href="@Url.Action("Node", new {cluster = Model.ClusterName, node = Model.NodeName})">@Model.ClusterName: @Model.NodeName</a><span class="note">:</span> Settings</h3>
         <div>
             <table>
                 <thead>

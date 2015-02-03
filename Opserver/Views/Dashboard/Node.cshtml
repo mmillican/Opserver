@@ -34,7 +34,7 @@ else
                     @s.PrettyName
                     @if(s.IsVM)
                     {
-                        @:(Virtual - <a href="/dashboard/node?node=@s.VMHost.PrettyName&view=@CurrentStatusTypes.VMHost" class="node-name-link">@s.VMHost.PrettyName</a>)
+                        @:(Virtual - <a href="@Url.Action("SingleNode", new {node = s.VMHost.PrettyName, view = CurrentStatusTypes.VMHost})" class="node-name-link">@s.VMHost.PrettyName</a>)
                     }
                 </b>
                 @if (s.ManagementUrl.HasValue())
@@ -117,25 +117,25 @@ else
                 switch (st)
                 {
                     case CurrentStatusTypes.SQLInstance:
-                        <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="/sql/instance?node=@s.PrettyName">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
+                        <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="@Url.Action("Instance", "SQL", new {node = s.PrettyName}))">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
                         break;
                     case CurrentStatusTypes.SQLActive:
-                        <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="/sql/active?node=@s.PrettyName">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
+                    <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="@Url.Action("Active", "SQL", new {node = s.PrettyName}))">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
                         break;
                     case CurrentStatusTypes.SQLTop:
-                        <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="/sql/top?node=@s.PrettyName">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
+                    <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="@Url.Action("Top", "SQL", new {node = s.PrettyName}))">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
                         break;
                     case CurrentStatusTypes.Redis:
-                        <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="/redis?node=@s.PrettyName">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
+                    <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="@Url.Action("Dashboard", "Redis", new {node = s.PrettyName})">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
                         break;
                     case CurrentStatusTypes.HAProxy:
-                        <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="/haproxy">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
+                    <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="@Url.Action("HAProxyDashboard", "HAProxy"))">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
                         break;
                     case CurrentStatusTypes.Elastic:
-                        <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="/elastic">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
+                    <a class="@(currentStatusType == st ? " selected" : "") exit-link" href="@Url.Action("Dashboard", "Elastic")">@st.GetDescription()<span class="icon arrow up-right-small"></span></a>
                         break;
                     default:
-                        <a class="@(currentStatusType == st ? " selected" : "")" href="/dashboard/node?node=@s.PrettyName&view=@st.ToString()">@st.GetDescription()</a>
+                    <a class="@(currentStatusType == st ? " selected" : "")" href="@Url.Action("SingleNode", new {node = s.PrettyName, view = st})">@st.GetDescription()</a>
                         break;
                 }
             }

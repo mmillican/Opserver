@@ -6,7 +6,7 @@
     var data = jobs.SafeData(true);
 }
     <div class="summary-dashboard">
-        <h3><a href="/sql/instance?node=@Model.Name">@Model.Name</a><span class="note">:</span> Agent Jobs
+        <h3><a href="@Url.Action("Instance", new {node = Model.Name})">@Model.Name</a><span class="note">:</span> Agent Jobs
             <span class="top-right-info">Updated @jobs.ToPollSpan()</span>
         </h3>
         @if (data.Any())

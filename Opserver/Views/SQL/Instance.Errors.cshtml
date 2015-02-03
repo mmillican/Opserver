@@ -6,7 +6,7 @@
     var data = errors.SafeData(true);
 }
     <div class="summary-dashboard">
-        <h3><a href="/sql/instance?node=@Model.Name">@Model.Name</a><span class="note">:</span> Errors last @errorMinutesToGet.Pluralize("minute")
+        <h3><a href="@Url.Action("Instance", new {node = Model.Name})">@Model.Name</a><span class="note">:</span> Errors last @errorMinutesToGet.Pluralize("minute")
             <span class="top-right-info">Updated @errors.ToPollSpan()</span>
         </h3>
         <div class="dashboard-description">You clicked on Errors/sec, which is query errors. The below is a list of SQL Server's recent error log entries, which may not show the query errors. <br />However, if you're looking to troubleshoot errors, you would want to see this list anyway just to check.</div>

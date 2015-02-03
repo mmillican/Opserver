@@ -148,7 +148,7 @@
                                     <span class="note">Host:</span>
                                     @if (enableDashboardLinks && DashboardData.GetNodeByName(w.HostName) != null)
                                     {
-                                        <a href="/dashboard/node?node=@w.HostName.UrlEncode()" class="node-name-link">@w.HostName</a>
+                                        <a href="@Url.Action("SingleNode", "Dashboard", new {node = w.HostName.UrlEncode()})" class="node-name-link">@w.HostName</a>
                                     }
                                     else
                                     {

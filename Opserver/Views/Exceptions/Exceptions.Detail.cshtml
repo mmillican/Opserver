@@ -137,14 +137,14 @@
 @if (error == null)
 {
     <div class="top-section error-bread-top">
-        <div class="error-header"><a href="/exceptions">Exceptions</a> > <span class="error-title">Error not found</span></div>
+        <div class="error-header"><a href="@Url.Action("Exceptions")">Exceptions</a> > <span class="error-title">Error not found</span></div>
     </div>
     <div class="error-not-found">Error was not found.  If this link worked previously, the error was hard deleted.</div>
 }
 else
 {
     <div class="top-section error-bread-top">
-        <div class="error-header"><a href="/exceptions">Exceptions</a> > <a href="/exceptions?log=@error.ApplicationName.UrlEncode()">@error.ApplicationName</a> > <span class="error-title">@error.Message</span> <span class="similar-link">(<a href="/exceptions/similar?id=@error.GUID&app=@error.ApplicationName.UrlEncode()">view similar</a>)</span></div>
+        <div class="error-header"><a href="@Url.Action("Exceptions", "Exceptions")">Exceptions</a> > <a href="@Url.Action("Exceptions", "Exceptions", new {log = error.ApplicationName.UrlEncode()})">@error.ApplicationName</a> > <span class="error-title">@error.Message</span> <span class="similar-link">(<a href="@Url.Action("ExceptionsSimilar", "Exceptions", new {id=error.GUID, app = error.ApplicationName.UrlEncode()})">view similar</a>)</span></div>
     </div>
     <div class="error-info">
         <div class="error-type">@error.Type</div>

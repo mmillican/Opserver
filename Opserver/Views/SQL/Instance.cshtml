@@ -24,7 +24,7 @@
 <div class="bottom-sub-section">
 <div class="summary-dashboard">
     <h3 class="header">
-        <a href="/sql/servers">SQL Instances</a><span class="note">:</span> @i.IconSpan() @i.Name
+        <a href="@Url.Action("Servers")">SQL Instances</a><span class="note">:</span> @i.IconSpan() @i.Name
         @Helpers.PollNow(i)
     </h3>
 @if (i.LastFetch == null)
@@ -101,7 +101,7 @@ else if (i.LastFetch.LastSuccess == null)
                 <tbody>
                     <tr title="@pd.CPUCount.Pluralize("Core") (including hyperthreading) across @pd.CPUSocketCount.Pluralize("Socket")">
                         <td>CPU</td>
-                        <td><a href="/sql/top?node=@i.Name">@(i.CurrentCPUPercent)%</a> <span class="note">(@pd.CPUCount.Pluralize("Core"))</span> <img class="cpu-graph" width="100" alt="CPU in the last hour for @i.Name" src="@Url.Content(string.Format("~/graph/sql/cpu/spark?node={0}&time={1}", i.Name, DateTime.UtcNow.ToString("yyyy-MM-dd")))" /></td>
+                        <td><a href="@Url.Action("Top", new {node = i.Name})">@(i.CurrentCPUPercent)%</a> <span class="note">(@pd.CPUCount.Pluralize("Core"))</span> <img class="cpu-graph" width="100" alt="CPU in the last hour for @i.Name" src="@Url.Content(string.Format("~/graph/sql/cpu/spark?node={0}&time={1}", i.Name, DateTime.UtcNow.ToString("yyyy-MM-dd")))" /></td>
                     </tr>
                     @if (pd.VirtualMachineType != VirtualMachineTypes.None)
                     {
@@ -210,7 +210,7 @@ Avgerage Write Stall: @v.AvgWriteStallMS ms">
                         {
                             @:,
                         }
-                        <span title="@cn.ClusterStatus">@cn.IconSpan() <a href="/sql/instance?node=@cn.Name" class="node-name-link @(cn.IsAnAGPrimary ? "bold" : "")">@cn.Name</a></span>
+                        <span title="@cn.ClusterStatus">@cn.IconSpan() <a href="@Url.Action("Instance", new {node = cn.Name})" class="node-name-link @(cn.IsAnAGPrimary ? "bold" : "")">@cn.Name</a></span>
                         iter++;
                     }
                 </div>
@@ -218,7 +218,7 @@ Avgerage Write Stall: @v.AvgWriteStallMS ms">
                 {
                     <div class="availability-group section-wrap collapsed">
                         <div class="availability-group-header">
-                            @ag.IconSpan() <a href="/sql/servers#/cluster/@ci.Cluster.Name/@ag.Name">@ag.Name</a> <span class="nite light">(@(ag.LocalReplica != null ? ag.LocalReplica.Role.ToSpan() : null))</span>
+                            @ag.IconSpan() <a href="@Url.Action("Servers")#/cluster/@ci.Cluster.Name/@ag.Name">@ag.Name</a> <span class="nite light">(@(ag.LocalReplica != null ? ag.LocalReplica.Role.ToSpan() : null))</span>
                             <span class="expander">click to expand</span>
                             <span class="availability-group-databases">
                                 <span class="icon database status-up"></span>@SQLHelpers.HealthDescriptionAGs(ci, ag.LocalReplica != null ? ag.LocalReplica.Databases : null, minimal: true)

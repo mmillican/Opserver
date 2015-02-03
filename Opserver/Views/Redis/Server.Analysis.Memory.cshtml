@@ -15,7 +15,7 @@
     if (serverInfo.SlaveCount <= 0) { return; }
     foreach (var ci in serverInfo.SlaveInstances)
     {
-        <li style="padding-left: @(nest * 20)px">@ci.IconSpan() <a href="/redis/analyze/memory?node=@ci.Host:@ci.Port&db=@Model.Database" class="node-name-link">@ci.Host</a> <span class="note">(@ci.Port)</span></li>
+        <li style="padding-left: @(nest * 20)px">@ci.IconSpan() <a href="@Url.Action("Analysis", new {node = string.Format("{0}:{1}", ci.Host, ci.Port), db = Model.Database})" class="node-name-link">@ci.Host</a> <span class="note">(@ci.Port)</span></li>
         @RenderSlaves(ci, ++nest)
     }
 }
@@ -34,7 +34,7 @@
                             - <span title="@(((int)Model.TotalTime.TotalMilliseconds).ToComma()) ms">Runtime: @Model.TotalTime.ToReadableString()</span>
                             - Run @Model.CreationDate.ToRelativeTimeSpan()
                         </span>
-                        <a style="float: right;" href="/redis/analyze/memory/clear?node=@serverInfo.Host:@serverInfo.Port&db=@Model.Database">Re-run analysis</a>
+                        <a style="float: right;" href="@Url.Action("ClearAnalysis", new {node = string.Format("{0}:{1}", serverInfo.Host, serverInfo.Port), db = Model.Database})">Re-run analysis</a>
                     </h3>
                 </th>
             </tr>

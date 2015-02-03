@@ -16,10 +16,10 @@
 }
 <div class="top-section error-bread-top">
     <div class="error-header">
-        <a href="/exceptions">Exceptions</a> > @if(Model.SelectedLog.HasValue()){<text><a href="/exceptions?log=@Model.SelectedLog.UrlEncode()">@Model.SelectedLog</a> > </text>}Search results for '@Model.Search'
+        <a href="@Url.Action("Exceptions")">Exceptions</a> > @if(Model.SelectedLog.HasValue()){<text><a href="@Url.Action("Exceptions", new {log = Model.SelectedLog.UrlEncode()})">@Model.SelectedLog</a> > </text>}Search results for '@Model.Search'
         @if (!Model.ShowDeleted)
         {
-        <span class="top-link">(<a href="/exceptions/search?log=@log.UrlEncode()&q=@Model.Search.UrlEncode()&showDeleted=true">Include Deleted</a>)</span>
+        <span class="top-link">(<a href="@Url.Action("ExceptionsSearch", new {log = log.UrlEncode(), q = Model.Search.UrlEncode(), showDeleted = true})">Include Deleted</a>)</span>
         }
     </div>
 </div>
@@ -32,7 +32,7 @@
     } 
     else 
     {                
-        @:No current exceptions found, <a href="/exceptions/search?log=@log.UrlEncode()&q=@Model.Search.UrlEncode()&showDeleted=true">would you like to search deleted errors?</a>
+        @:No current exceptions found, <a href="@Url.Action("ExceptionsSearch", new {log = log.UrlEncode(), q = Model.Search.UrlEncode(), showDeleted = true})">would you like to search deleted errors?</a>
     }
     </div>
 </div>
